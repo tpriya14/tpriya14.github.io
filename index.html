@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tahmina Sultana Priya</title>
+<meta name="description" content="Tahmina Sultana Priya — PhD Candidate, Computer Science, Virginia Tech. Machine learning for EHR and genomic data in precision medicine.">
+
+<!--
+  ============================================================
+  HOW TO EDIT THIS SITE
+  ============================================================
+  1. All text content lives in plain HTML below — search for the
+     heading you want to change (e.g. "PUBLICATIONS SECTION") and
+     edit the text directly.
+  2. Colors, fonts, and spacing are controlled by the CSS variables
+     at the top of the <style> block below (search "EDITABLE
+     THEME"). Change a value there to update the whole site.
+  3. To add a new nav link: add an <a> in the <nav> below, and a
+     matching <section id="..."> further down.
+  4. To add a new job / publication / degree / presentation: copy
+     an existing .card block in that section and edit the text
+     inside.
+  5. To add a new monthly highlight: copy a .highlight-item block
+     in the Monthly Highlights section, keep newest entries first.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   EDITABLE THEME — change these to restyle the whole site
+   ============================================================ */
+:root{
+  --bg:            #FBFAF8;   /* page background */
+  --bg-alt:        #F2F0EB;   /* alternating section background */
+  --card-bg:       #FFFFFF;   /* card background */
+  --ink:           #232323;   /* primary text */
+  --ink-soft:      #5B5B5B;   /* secondary text */
+  --line:          #E3E0D8;   /* hairline borders */
+
+  --accent:        #861F41;   /* primary accent (Virginia Tech maroon) */
+  --accent-2:      #E5751F;   /* secondary accent (Virginia Tech orange) */
+  --accent-tint:   #F6EBEE;   /* pale accent background */
+
+  --font-heading:  'Source Serif 4', Georgia, serif;
+  --font-body:     'Inter', -apple-system, sans-serif;
+
+  --maxw:          860px;
+  --nav-h:         64px;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top:var(--nav-h);}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.65;
+}
+a{color:var(--accent); text-decoration:none;}
+a:hover{text-decoration:underline;}
+::selection{background:var(--accent); color:#fff;}
+
+h1,h2,h3{
+  font-family:var(--font-heading);
+  font-weight:600;
+  color:var(--ink);
+  margin:0 0 .4em 0;
+}
+
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav.site-nav{
+  position:sticky; top:0; z-index:50;
+  height:var(--nav-h);
+  background:rgba(251,250,248,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+nav.site-nav .wrap{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1040px;
+}
+.nav-name{
+  font-family:var(--font-heading);
+  font-weight:600;
+  font-size:1.05rem;
+  color:var(--ink);
+}
+.nav-name span{color:var(--accent);}
+.nav-links{
+  display:flex;
+  gap:28px;
+  list-style:none;
+  margin:0; padding:0;
+}
+.nav-links a{
+  color:var(--ink-soft);
+  font-size:.92rem;
+  font-weight:500;
+  padding:6px 0;
+  border-bottom:2px solid transparent;
+}
+.nav-links a:hover{
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom-color:var(--accent-2);
+}
+.nav-toggle{ display:none; }
+@media (max-width:720px){
+  .nav-links{
+    position:fixed; top:var(--nav-h); left:0; right:0;
+    background:var(--bg);
+    flex-direction:column;
+    gap:0;
+    border-bottom:1px solid var(--line);
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+  }
+  .nav-links.open{ max-height:320px; }
+  .nav-links a{
+    padding:14px 24px;
+    width:100%;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-toggle{
+    display:block;
+    background:none; border:none;
+    font-size:1.4rem;
+    cursor:pointer;
+    color:var(--ink);
+  }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+header.hero{
+  padding:64px 0 56px;
+  border-bottom:1px solid var(--line);
+}
+header.hero .wrap{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:40px;
+  align-items:center;
+}
+.hero-eyebrow{
+  font-size:.82rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+h1.hero-title{
+  font-size:clamp(1.9rem, 4vw, 2.7rem);
+  line-height:1.15;
+}
+.hero-title .last{ color:var(--accent); }
+.hero-sub{
+  color:var(--ink-soft);
+  font-size:1.05rem;
+  margin-top:12px;
+  max-width:60ch;
+}
+.hero-badge{
+  width:132px; height:132px;
+  border-radius:50%;
+  background:linear-gradient(145deg, var(--accent), var(--accent-2));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-heading);
+  color:#fff;
+  font-size:2.6rem;
+  font-weight:600;
+  flex-shrink:0;
+  box-shadow:0 6px 18px rgba(134,31,65,0.18);
+}
+@media (max-width:600px){
+  header.hero .wrap{ grid-template-columns:1fr; text-align:left; }
+  .hero-badge{ width:88px; height:88px; font-size:1.8rem; order:-1; }
+}
+
+.hero-links{
+  margin-top:22px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 18px;
+  font-size:.92rem;
+}
+.hero-links a{ color:var(--ink-soft); }
+.hero-links a:hover{ color:var(--accent); }
+.hero-links .sep{ color:var(--line); }
+
+/* ============================================================
+   SECTIONS (generic)
+   ============================================================ */
+section{ padding:56px 0; border-bottom:1px solid var(--line); }
+section.alt{ background:var(--bg-alt); }
+section:last-of-type{ border-bottom:none; }
+
+.section-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:30px;
+}
+.section-head h2{ font-size:1.5rem; }
+.section-head .count{
+  font-size:.82rem;
+  color:var(--ink-soft);
+  font-family:var(--font-body);
+  font-weight:500;
+}
+
+/* ---- Cards (used for education / experience / publications) ---- */
+.card{
+  background:var(--card-bg);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:22px 24px;
+}
+.card + .card{ margin-top:14px; }
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:6px 16px;
+}
+.card-title{ font-weight:600; font-size:1.02rem; color:var(--ink); }
+.card-org{ color:var(--accent); font-weight:600; font-size:.92rem; }
+.card-date{
+  font-size:.82rem;
+  color:var(--ink-soft);
+  white-space:nowrap;
+  background:var(--accent-tint);
+  padding:2px 10px;
+  border-radius:100px;
+}
+.card-meta{ color:var(--ink-soft); font-size:.88rem; margin-top:2px; }
+.card-stack{ color:var(--ink-soft); font-size:.82rem; margin-top:10px; font-style:italic; }
+.card ul{ margin:12px 0 0 0; padding-left:20px; color:var(--ink-soft); font-size:.94rem; }
+.card ul li{ margin-bottom:5px; }
+
+/* publications */
+.pub-status{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  color:#fff;
+  background:var(--accent);
+  padding:3px 9px;
+  border-radius:4px;
+  margin-bottom:10px;
+}
+.pub-status.pending{ background:var(--accent-2); }
+.pub-title{ font-size:1.02rem; line-height:1.5; color:var(--ink); }
+.pub-venue{ color:var(--ink-soft); font-size:.88rem; margin-top:6px; }
+
+/* about */
+.about-text{ color:var(--ink-soft); max-width:66ch; font-size:1rem; }
+.about-text p + p{ margin-top:1em; }
+
+.award-list{
+  margin-top:24px;
+  display:grid;
+  gap:10px;
+}
+.award-item{
+  display:flex; gap:12px; align-items:baseline;
+  font-size:.92rem;
+  color:var(--ink-soft);
+}
+.award-item .mark{ color:var(--accent-2); font-weight:700; }
+
+/* skills */
+.skill-row{ display:grid; grid-template-columns:170px 1fr; gap:10px 18px; padding:12px 0; border-top:1px solid var(--line); }
+.skill-row:last-child{ border-bottom:1px solid var(--line); }
+.skill-cat{ font-weight:600; font-size:.88rem; color:var(--ink); }
+.skill-vals{ color:var(--ink-soft); font-size:.92rem; }
+@media (max-width:600px){ .skill-row{ grid-template-columns:1fr; gap:4px; } }
+
+/* presentations */
+.pres-type{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:var(--accent-tint);
+  padding:3px 9px;
+  border-radius:4px;
+  margin-bottom:10px;
+}
+
+/* monthly highlights */
+.highlights{
+  display:grid;
+  gap:0;
+}
+.highlight-item{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:20px;
+  padding:18px 0;
+  border-top:1px solid var(--line);
+}
+.highlight-item:last-child{ border-bottom:1px solid var(--line); }
+.highlight-month{
+  font-family:var(--font-heading);
+  font-weight:600;
+  color:var(--accent);
+  font-size:.92rem;
+  padding-top:1px;
+}
+.highlight-text{ color:var(--ink-soft); font-size:.94rem; }
+.highlight-text b{ color:var(--ink); font-weight:600; }
+@media (max-width:600px){
+  .highlight-item{ grid-template-columns:1fr; gap:4px; }
+}
+
+/* contact */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+  gap:14px;
+}
+.contact-card{
+  background:var(--card-bg);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:18px 20px;
+  display:flex; flex-direction:column; gap:4px;
+}
+.contact-card .label{ font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); }
+.contact-card .value{ font-weight:600; color:var(--ink); }
+.contact-card:hover{ border-color:var(--accent); }
+
+footer{
+  padding:32px 0;
+  text-align:center;
+  font-size:.82rem;
+  color:var(--ink-soft);
+}
+
+/* fade-in on scroll */
+.reveal{ opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease; }
+.reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <div class="nav-name">Tahmina Sultana <span>Priya</span></div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#presentations">Presentations</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-eyebrow">PhD Candidate · Computer Science</div>
+      <h1 class="hero-title">Tahmina Sultana <span class="last">Priya</span></h1>
+      <p class="hero-sub">I'm a PhD candidate at Virginia Tech working on machine learning for electronic health record and genomic data, with the aim of turning large biomedical datasets into evidence that supports precision medicine.</p>
+      <div class="hero-links">
+        <a href="mailto:tpriya@vt.edu">tpriya@vt.edu</a>
+        <span class="sep">/</span>
+        <a href="tel:+15408249427">(+1) 540-824-9427</a>
+        <span class="sep">/</span>
+        <a href="https://www.linkedin.com/in/tahmina14/" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="sep">/</span>
+        <a href="https://scholar.google.com/citations?user=o9PoLqsAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <span class="sep">/</span>
+        <a href="https://github.com/tpriya14" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="hero-badge">TP</div>
+  </div>
+</header>
+
+<!-- ============================================================
+     ABOUT SECTION
+     ============================================================ -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><h2>About</h2></div>
+    <div class="about-text reveal">
+      <p>I'm a PhD candidate in the Department of Computer Science at Virginia Tech, expected to graduate in December 2026, and I completed my MSc in the same department in May 2025 with a 4.00 GPA. My research analyzes large-scale EHR, clinical, and genomic datasets to support precision medicine &mdash; building reproducible pipelines for healthcare data integration and developing predictive, explainable models for prognosis and risk stratification, with a current focus on metabolic and liver disease.</p>
+      <p>Alongside my PhD, I've completed two internship terms as a Bioinformatics intern in the Division of Computational Biology at Mayo Clinic, and taught undergraduate courses in machine learning, data mining, and software engineering as a Lecturer at Daffodil International University. Before returning to academia, I worked as a System Engineer and Senior Software Engineer building web applications and IoT-based data systems.</p>
+    </div>
+    <div class="award-list reveal">
+      <div class="award-item"><span class="mark">&#9670;</span> Pratt Fellowship, Virginia Tech (2024&ndash;2025)</div>
+      <div class="award-item"><span class="mark">&#9670;</span> Dean's Award, KUET (2017&ndash;2018, 2019&ndash;2020)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EDUCATION SECTION — copy a .card block to add a new degree
+     ============================================================ -->
+<section id="education" class="alt">
+  <div class="wrap">
+    <div class="section-head"><h2>Education</h2></div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">Ph.D. in Computer Science</div>
+        <div class="card-date">Expected Dec 2026</div>
+      </div>
+      <div class="card-org">Virginia Polytechnic Institute and State University</div>
+      <div class="card-meta">Blacksburg, VA, USA</div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">M.Sc. in Computer Science</div>
+        <div class="card-date">May 2025</div>
+      </div>
+      <div class="card-org">Virginia Polytechnic Institute and State University</div>
+      <div class="card-meta">Blacksburg, VA, USA &nbsp;&middot;&nbsp; GPA 4.00 / 4.00</div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">B.Sc. in Computer Science and Engineering</div>
+        <div class="card-date">March 2020</div>
+      </div>
+      <div class="card-org">Khulna University of Engineering &amp; Technology</div>
+      <div class="card-meta">Khulna, Bangladesh &nbsp;&middot;&nbsp; CGPA 3.77 / 4.00</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERIENCE SECTION — copy a .card block to add a new role
+     ============================================================ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><h2>Experience</h2></div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">Graduate Research Assistant</div>
+        <div class="card-date">May 2023 &mdash; Present</div>
+      </div>
+      <div class="card-org">Virginia Tech, Department of Computer Science</div>
+      <div class="card-meta">Blacksburg, VA, USA</div>
+      <div class="card-stack">Python &middot; R &middot; SQL &middot; Machine Learning &middot; EHR Data Analytics</div>
+      <ul>
+        <li>Analyze large-scale EHR, clinical, and genomic datasets to support precision medicine research.</li>
+        <li>Develop reproducible pipelines for healthcare data integration, preprocessing, and validation.</li>
+        <li>Build and evaluate predictive and statistical models for prognosis, risk stratification, and outcome prediction.</li>
+        <li>Apply explainable AI and subgroup modeling to identify clinical factors associated with disease progression.</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">Bioinformatics Intern, Division of Computational Biology</div>
+        <div class="card-date">Jan&ndash;Aug 2024; May&ndash;Aug 2025</div>
+      </div>
+      <div class="card-org">Mayo Clinic</div>
+      <div class="card-meta">Rochester, MN, USA</div>
+      <div class="card-stack">Python &middot; R &middot; SQL &middot; Clinical &amp; Genomic Data Analysis</div>
+      <ul>
+        <li>Analyzed EHR, clinical, and genomic data to identify factors associated with disease progression and patient outcomes.</li>
+        <li>Performed data preprocessing, integration, validation, and statistical analysis of large-scale biomedical datasets.</li>
+        <li>Developed predictive models for patient risk assessment, outcome prediction, and healthcare analytics.</li>
+        <li>Conducted survival and drug response analyses to support precision medicine research.</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">Graduate Teaching Assistant</div>
+        <div class="card-date">Jan&ndash;Dec 2023</div>
+      </div>
+      <div class="card-org">Virginia Tech, Department of Computer Science</div>
+      <div class="card-meta">Blacksburg, VA, USA</div>
+      <div class="card-stack">Python &middot; Java</div>
+      <ul>
+        <li>Assisted instruction for Data Structures, Computer Organization, and Android Development courses.</li>
+        <li>Evaluated assignments and provided technical guidance to students.</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">Lecturer, Department of Computer Science and Engineering</div>
+        <div class="card-date">Jan 2021 &ndash; Dec 2022</div>
+      </div>
+      <div class="card-org">Daffodil International University</div>
+      <div class="card-meta">Dhaka, Bangladesh</div>
+      <div class="card-stack">Python</div>
+      <ul>
+        <li>Taught undergraduate courses including Web Engineering, Data Mining, Machine Learning, Software Engineering, Digital Electronics, and Data Communication.</li>
+        <li>Instructed over 200 students and supervised software development and research projects.</li>
+      </ul>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">System Engineer &amp; Senior Software Engineer</div>
+        <div class="card-date">Aug 2020 &ndash; Dec 2022</div>
+      </div>
+      <div class="card-org">Vertical Innovations Limited</div>
+      <div class="card-meta">Dhaka, Bangladesh</div>
+      <div class="card-stack">Python &middot; Django &middot; Nuxt.js &middot; JavaScript &middot; Postgres &middot; IoT</div>
+      <ul>
+        <li>Led development of scalable web applications using Django and Nuxt.js.</li>
+        <li>Developed Python-based analytics dashboards, visualization tools, and cloud-based solutions.</li>
+        <li>Designed IoT-based data collection systems and supported software deployment and operations.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PUBLICATIONS SECTION — copy a .card block to add a new paper
+     ============================================================ -->
+<section id="publications" class="alt">
+  <div class="wrap">
+    <div class="section-head"><h2>Selected Publications</h2></div>
+
+    <div class="card reveal">
+      <span class="pub-status pending">Accepted &middot; 2026</span>
+      <div class="pub-title">Priya et al., &ldquo;Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts&rdquo;</div>
+      <div class="pub-venue">Nature Communications</div>
+    </div>
+
+    <div class="card reveal">
+      <span class="pub-status">2023</span>
+      <div class="pub-title">Priya et al., &ldquo;Deep Phenotyping of Non-Alcoholic Fatty Liver Disease Patients with Genetic Factors&rdquo;</div>
+      <div class="pub-venue">Machine Learning for Health (ML4H)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRESENTATIONS SECTION — copy a .card block to add a new talk.
+     EDIT ME: these are placeholder examples — swap in your real
+     talks, posters, and invited presentations.
+     ============================================================ -->
+<section id="presentations">
+  <div class="wrap">
+    <div class="section-head"><h2>Presentations</h2></div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">Subtyping MASLD using EHR-Linked Genomic Cohorts</div>
+        <div class="card-date">2026</div>
+      </div>
+      <span class="pres-type">Talk</span>
+      <div class="card-meta">Add conference / venue name here</div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-title">Deep Phenotyping of NAFLD Patients with Genetic Factors</div>
+        <div class="card-date">2023</div>
+      </div>
+      <span class="pres-type">Poster</span>
+      <div class="card-meta">Machine Learning for Health (ML4H)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MONTHLY HIGHLIGHTS SECTION — add a new .highlight-item for
+     each update. Newest first. EDIT ME: replace with your real
+     recent news / milestones.
+     ============================================================ -->
+<section id="highlights" class="alt">
+  <div class="wrap">
+    <div class="section-head"><h2>Monthly Highlights</h2></div>
+
+    <div class="highlights">
+      <div class="highlight-item reveal">
+        <div class="highlight-month">Aug 2026</div>
+        <div class="highlight-text"><b>Paper accepted</b> — our work on MASLD subtyping was accepted to <i>Nature Communications</i>.</div>
+      </div>
+      <div class="highlight-item reveal">
+        <div class="highlight-month">Jun 2026</div>
+        <div class="highlight-text">Add a highlight — e.g. a talk given, a milestone reached, or news to share.</div>
+      </div>
+      <div class="highlight-item reveal">
+        <div class="highlight-month">May 2026</div>
+        <div class="highlight-text">Add a highlight — this section is a good place for short, dated updates.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SKILLS SECTION
+     ============================================================ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><h2>Technical Skills</h2></div>
+
+    <div class="skill-row reveal">
+      <div class="skill-cat">Programming</div>
+      <div class="skill-vals">Python, R, SQL, C/C++, Java</div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">Machine Learning &amp; Statistics</div>
+      <div class="skill-vals">Predictive Modeling, Statistical Learning, Survival Analysis, Risk Prediction, Large Language Models, Explainable AI, Deep Learning, PyTorch, Scikit-learn</div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">Databases</div>
+      <div class="skill-vals">SQL, MySQL, PostgreSQL</div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">Tools &amp; Platforms</div>
+      <div class="skill-vals">Git, Linux/Unix, Jupyter Notebook, HPC, VS Code</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT SECTION
+     ============================================================ -->
+<section id="contact" class="alt">
+  <div class="wrap">
+    <div class="section-head"><h2>Contact</h2></div>
+    <div class="contact-grid reveal">
+      <a class="contact-card" href="mailto:tpriya@vt.edu">
+        <span class="label">Email</span>
+        <span class="value">tpriya@vt.edu</span>
+      </a>
+      <a class="contact-card" href="tel:+15408249427">
+        <span class="label">Phone</span>
+        <span class="value">(+1) 540-824-9427</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/tahmina14/" target="_blank" rel="noopener">
+        <span class="label">LinkedIn</span>
+        <span class="value">/in/tahmina14</span>
+      </a>
+      <a class="contact-card" href="https://scholar.google.com/citations?user=o9PoLqsAAAAJ&hl=en" target="_blank" rel="noopener">
+        <span class="label">Google Scholar</span>
+        <span class="value">View profile</span>
+      </a>
+      <a class="contact-card" href="https://github.com/tpriya14" target="_blank" rel="noopener">
+        <span class="label">GitHub</span>
+        <span class="value">@tpriya14</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; <span id="year"></span> Tahmina Sultana Priya &nbsp;&middot;&nbsp; Blacksburg, VA, USA
+</footer>
+
+<script>
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
