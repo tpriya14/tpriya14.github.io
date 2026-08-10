@@ -4,23 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tahmina Sultana Priya</title>
-<meta name="description" content="Tahmina Sultana Priya — PhD Candidate, Computer Science, Virginia Tech.">
+<meta name="description" content="Tahmina Sultana Priya — PhD Candidate, Computer Science, Virginia Tech. Machine learning for health, explainable AI, and precision medicine.">
+<meta name="color-scheme" content="light dark">
 
 <!--
   ============================================================
   HOW TO EDIT THIS SITE
   ============================================================
-  1. Colors, fonts, and spacing are CSS variables at the top of
-     the <style> block (search "EDITABLE THEME"). Change one
-     value there to restyle the whole page.
+  1. Colors, fonts, and spacing are CSS variables near the top
+     of the <style> block (search "LIGHT THEME" / "DARK THEME").
+     Change a value there to restyle the whole site in that mode.
   2. Content is plain HTML further down — search for the section
      heading you want to change (e.g. "NEWS SECTION") and edit
      the text directly.
   3. To add a news item: copy a .news-item block, keep newest
      first.
-  4. To add a publication or presentation: copy a .pub-item
-     block in that section.
+  4. To add a publication or presentation: copy a .pub-item or
+     .pres-item block in that section.
   5. To add a job or degree: copy a .list-row block.
+  6. The theme toggle (Light / Dark / Auto) is saved in the
+     visitor's browser via localStorage — each visitor sees their
+     own last choice; "Auto" follows their OS setting.
+  7. PROFILE PHOTO: to add your photo, upload an image file named
+     exactly "photo.jpg" into the SAME folder as this index.html
+     file on GitHub (repo root, next to index.html — not in a
+     subfolder). It will automatically appear in the circular
+     avatar, cropped to fill it. No code editing needed. Until
+     you upload one, it shows your initials ("TP") instead. If
+     your file is a .png instead of .jpg, either rename it to
+     photo.jpg before uploading, or change src="photo.jpg" to
+     src="photo.png" in the <div class="avatar"> line below.
+  8. PRESENTATION / CONFERENCE PHOTOS: works the same way. Upload
+     image files named exactly "presentation-1.jpg",
+     "presentation-2.jpg", "presentation-3.jpg" ... up to
+     "presentation-8.jpg" (up to 8 photos) into the SAME folder
+     as this index.html file (repo root). Each one you upload
+     automatically appears in the "Photos" section grid — no
+     code editing, no need to upload all 8, missing numbers are
+     simply skipped. Need more than 8? Copy a
+     <figure><img src="presentation-9.jpg" ...></figure> line in
+     the Photos section below and add "presentation-9.jpg" etc.
+  9. DOWNLOADABLE CV: upload a PDF named exactly "CV.pdf" into
+     the SAME folder as this index.html file (repo root). The
+     "Download CV" button in the sidebar will then work
+     automatically — no code editing needed. If your file has a
+     different name, either rename it to CV.pdf, or change
+     href="CV.pdf" to your filename in the "Download CV" link
+     below.
   ============================================================
 -->
 
@@ -28,24 +58,63 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<script>
+  // Runs before paint to avoid a flash of the wrong theme.
+  (function(){
+    var saved = localStorage.getItem('theme') || 'auto';
+    document.documentElement.setAttribute('data-theme', saved);
+  })();
+</script>
+
 <style>
 /* ============================================================
-   EDITABLE THEME
+   LIGHT THEME (default / :root)
    ============================================================ */
 :root{
   --bg:            #FFFFFF;
+  --bg-sidebar:    #F7F8FA;
   --ink:           #1B1B1B;
   --ink-soft:      #5C5C5C;
   --ink-faint:     #8A8A8A;
   --line:          #E7E7E7;
 
-  --accent:        #1565C0;   /* primary accent — links, tags */
+  --accent:        #1565C0;
   --accent-tint:   #EAF1FB;
 
   --font-heading:  'Source Serif 4', Georgia, serif;
   --font-body:     'Inter', -apple-system, sans-serif;
 
-  --maxw:          700px;
+  --sidebar-w:     300px;
+  --content-maxw:  clamp(640px, 62vw, 1040px);
+}
+
+/* ============================================================
+   DARK THEME
+   ============================================================ */
+[data-theme="dark"]{
+  --bg:            #14161A;
+  --bg-sidebar:    #1A1D22;
+  --ink:           #EDEDEF;
+  --ink-soft:      #B4B7BD;
+  --ink-faint:     #82868D;
+  --line:          #2B2F36;
+
+  --accent:        #6FA8F5;
+  --accent-tint:   #1E2A3D;
+}
+
+/* AUTO: follow OS preference */
+@media (prefers-color-scheme: dark){
+  [data-theme="auto"]{
+    --bg:            #14161A;
+    --bg-sidebar:    #1A1D22;
+    --ink:           #EDEDEF;
+    --ink-soft:      #B4B7BD;
+    --ink-faint:     #82868D;
+    --line:          #2B2F36;
+    --accent:        #6FA8F5;
+    --accent-tint:   #1E2A3D;
+  }
 }
 
 *{ box-sizing:border-box; }
@@ -57,252 +126,355 @@ body{
   background:var(--bg);
   color:var(--ink);
   font-family:var(--font-body);
-  font-size:16px;
+  font-size:16.5px;
   line-height:1.7;
+  transition:background .2s ease, color .2s ease;
 }
 a{ color:var(--accent); text-decoration:none; }
 a:hover{ text-decoration:underline; }
 ::selection{ background:var(--accent); color:#fff; }
 
-.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+/* ============================================================
+   SHELL: sidebar + content, fills the full viewport width
+   ============================================================ */
+.shell{
+  display:grid;
+  grid-template-columns:var(--sidebar-w) 1fr;
+  min-height:100vh;
+}
+@media (max-width:900px){
+  .shell{ grid-template-columns:1fr; }
+}
 
-/* top mini nav */
-.topnav{
-  position:sticky; top:0; z-index:20;
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid var(--line);
+/* ---------- Sidebar ---------- */
+.sidebar{
+  background:var(--bg-sidebar);
+  border-right:1px solid var(--line);
+  padding:48px 32px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
 }
-.topnav .wrap{
-  display:flex; align-items:center; justify-content:center;
-  gap:28px;
-  height:52px;
+@media (max-width:900px){
+  .sidebar{
+    position:relative;
+    height:auto;
+    border-right:none;
+    border-bottom:1px solid var(--line);
+    padding:36px 24px 28px;
+  }
 }
-.topnav a{
-  color:var(--ink-soft);
-  font-size:.85rem;
-  font-weight:500;
-}
-.topnav a:hover{ color:var(--accent); text-decoration:none; }
 
-/* ---------- Header / profile ---------- */
-header.profile{
-  padding:64px 0 48px;
-  text-align:center;
-}
 .avatar{
-  width:120px; height:120px;
+  width:96px; height:96px;
   border-radius:50%;
-  margin:0 auto 22px;
+  margin:0 0 18px;
   background:linear-gradient(150deg, var(--accent), #4A90D9);
   display:flex; align-items:center; justify-content:center;
   font-family:var(--font-heading);
-  font-size:2.2rem;
+  font-size:1.9rem;
   color:#fff;
   font-weight:600;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
 }
+.avatar img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+@media (max-width:900px){ .avatar{ margin:0 auto 16px; } }
+
 h1.pname{
   font-family:var(--font-heading);
-  font-size:2rem;
+  font-size:1.5rem;
   font-weight:600;
   margin:0;
+  line-height:1.25;
 }
-.ptitle{
-  color:var(--ink-soft);
-  font-size:1.02rem;
-  margin-top:8px;
+.ptitle{ color:var(--ink-soft); font-size:.92rem; margin-top:8px; }
+.pinst{ color:var(--ink-faint); font-size:.88rem; margin-top:2px; }
+@media (max-width:900px){
+  h1.pname, .ptitle, .pinst{ text-align:center; }
 }
-.pinst{
-  color:var(--ink-faint);
-  font-size:.95rem;
-  margin-top:2px;
-}
+
 .picons{
-  margin-top:20px;
+  margin-top:22px;
   display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
+  flex-direction:column;
+  gap:6px;
+}
+@media (max-width:900px){
+  .picons{ flex-direction:row; flex-wrap:wrap; justify-content:center; }
 }
 .picons a{
-  font-size:.82rem;
-  font-weight:500;
-  color:var(--ink-soft);
-  border:1px solid var(--line);
-  padding:6px 14px 6px 11px;
-  border-radius:100px;
+  font-size:.85rem; font-weight:500; color:var(--ink-soft);
+  padding:6px 4px; border-radius:6px;
+  display:inline-flex; align-items:center; gap:9px;
+}
+.picons a:hover{ color:var(--accent); text-decoration:none; background:var(--accent-tint); }
+.picon{ width:16px; height:16px; flex-shrink:0; }
+
+.cv-btn{
+  margin-top:16px;
   display:inline-flex;
   align-items:center;
-  gap:7px;
-}
-.picon{
-  width:15px; height:15px;
-  flex-shrink:0;
-}
-.picons a:hover{
-  color:var(--accent);
-  border-color:var(--accent);
+  justify-content:center;
+  gap:8px;
+  background:var(--accent);
+  color:#fff;
+  font-size:.86rem;
+  font-weight:600;
+  padding:10px 16px;
+  border-radius:8px;
   text-decoration:none;
 }
+.cv-btn:hover{ opacity:.9; text-decoration:none; }
+.cv-btn svg{ width:15px; height:15px; }
+@media (max-width:900px){ .cv-btn{ width:100%; max-width:220px; margin:16px auto 0; } }
 
-/* ---------- Sections ---------- */
-section{ padding:38px 0; border-top:1px solid var(--line); }
-header.profile + section{ border-top:1px solid var(--line); }
+/* nav */
+.sidenav{
+  margin-top:32px;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  border-top:1px solid var(--line);
+  padding-top:20px;
+}
+@media (max-width:900px){
+  .sidenav{
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    border-top:1px solid var(--line);
+    margin-top:24px;
+    padding-top:18px;
+  }
+}
+.sidenav a{
+  font-size:.86rem; font-weight:500; color:var(--ink-soft);
+  padding:7px 8px; border-radius:6px;
+}
+.sidenav a:hover{ color:var(--accent); background:var(--accent-tint); text-decoration:none; }
 
-h2.sec-title{
-  font-family:var(--font-heading);
-  font-size:1.35rem;
+/* theme toggle */
+.theme-toggle{
+  margin-top:auto;
+  padding-top:28px;
+  display:flex;
+  gap:4px;
+  border-top:1px solid var(--line);
+  margin-top:28px;
+}
+@media (max-width:900px){ .theme-toggle{ justify-content:center; } }
+.theme-btn{
+  flex:1;
+  font-family:var(--font-body);
+  font-size:.78rem;
   font-weight:600;
-  margin:0 0 20px 0;
-}
-.sec-link{
-  float:right;
-  font-size:.8rem;
-  font-weight:500;
   color:var(--ink-faint);
+  background:transparent;
+  border:1px solid var(--line);
+  padding:7px 6px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+.theme-btn:first-child{ border-radius:6px 0 0 6px; }
+.theme-btn:last-child{ border-radius:0 6px 6px 0; }
+.theme-btn:not(:first-child){ border-left:none; }
+.theme-btn svg{ width:13px; height:13px; }
+.theme-btn.active{
+  color:var(--accent);
+  background:var(--accent-tint);
+  border-color:var(--accent);
 }
 
-.bio p{ color:var(--ink-soft); margin:0 0 1em 0; }
+/* ---------- Main content ---------- */
+main.content{
+  padding:0 clamp(24px, 4vw, 64px);
+  min-width:0;
+}
+@media (max-width:900px){ main.content{ padding:0 24px; } }
+
+.inner{ max-width:var(--content-maxw); margin:0; }
+.inner-wide{ max-width:clamp(900px, 88vw, 1360px); margin:0; }
+
+section{ padding:44px 0; border-top:1px solid var(--line); }
+main.content > section:first-child{ border-top:none; }
+
+h2.sec-title{ font-family:var(--font-heading); font-size:1.35rem; font-weight:600; margin:0 0 22px 0; }
+
+.bio p{ color:var(--ink-soft); margin:0 0 1em 0; max-width:72ch; }
 .bio p:last-child{ margin-bottom:0; }
 
-/* about grid: interests + education side by side */
-.about-grid{
-  margin-top:34px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:36px;
-}
-@media (max-width:600px){
-  .about-grid{ grid-template-columns:1fr; gap:28px; }
-}
-h3.sub-title{
-  font-family:var(--font-heading);
-  font-size:1.02rem;
-  font-weight:600;
-  color:var(--ink);
-  margin:0 0 14px 0;
-}
-.plain-list{
-  margin:0; padding-left:18px;
-  color:var(--ink-soft);
-  font-size:.88rem;
-}
+.tag-list{ display:flex; flex-wrap:wrap; gap:9px; }
+.tag{ font-size:.85rem; color:var(--ink-soft); background:var(--accent-tint); padding:6px 13px; border-radius:6px; }
+
+.about-grid{ margin-top:34px; display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+@media (max-width:640px){ .about-grid{ grid-template-columns:1fr; gap:28px; } }
+h3.sub-title{ font-family:var(--font-heading); font-size:1.02rem; font-weight:600; color:var(--ink); margin:0 0 14px 0; }
+.plain-list{ margin:0; padding-left:18px; color:var(--ink-soft); font-size:.88rem; }
 .plain-list li{ margin-bottom:7px; }
 .about-col .list-row{ padding:9px 0; }
 .about-col .list-main{ font-size:.9rem; }
 .about-col .list-sub{ font-size:.8rem; }
 .about-col .list-year{ font-size:.78rem; }
 
-/* interests */
-.tag-list{ display:flex; flex-wrap:wrap; gap:9px; }
-.tag{
-  font-size:.85rem;
-  color:var(--ink-soft);
-  background:var(--accent-tint);
-  padding:6px 13px;
-  border-radius:6px;
-}
-
-/* simple list rows (education / experience) */
 .list-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  gap:16px;
-  padding:11px 0;
-  border-bottom:1px dashed var(--line);
+  display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+  padding:11px 0; border-bottom:1px dashed var(--line);
 }
 .list-row:last-child{ border-bottom:none; }
 .list-main{ font-weight:600; font-size:.97rem; color:var(--ink); }
 .list-sub{ color:var(--ink-soft); font-size:.88rem; margin-top:2px; }
-.list-year{
-  color:var(--ink-faint);
-  font-size:.85rem;
-  white-space:nowrap;
-  font-family:var(--font-body);
-}
-.list-desc{
-  margin:6px 0 0 0;
-  padding-left:18px;
-  color:var(--ink-soft);
-  font-size:.9rem;
-}
+.list-year{ color:var(--ink-faint); font-size:.85rem; white-space:nowrap; font-family:var(--font-body); }
+.list-desc{ margin:6px 0 0 0; padding-left:18px; color:var(--ink-soft); font-size:.9rem; }
 .list-desc li{ margin-bottom:4px; }
 
-/* news */
-.news-item{
-  padding:14px 0;
-  border-bottom:1px dashed var(--line);
-  font-size:.94rem;
-  color:var(--ink-soft);
-}
+.news-item{ padding:14px 0; border-bottom:1px dashed var(--line); font-size:.94rem; color:var(--ink-soft); }
 .news-item:last-child{ border-bottom:none; }
-.news-item .news-date{
-  font-weight:700;
-  color:var(--ink);
-}
+.news-item .news-date{ font-weight:700; color:var(--ink); }
 .news-item b{ color:var(--ink); }
 
-/* publications & presentations — citation style */
-.pub-item, .pres-item{
-  padding:18px 0;
-  border-bottom:1px dashed var(--line);
+/* publications & presentations: 2-column grid on wide screens */
+.pub-grid, .pres-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0 40px;
 }
+@media (min-width:1000px){
+  .pub-grid, .pres-grid{ grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); }
+}
+.pub-item, .pres-item{ padding:18px 0; border-bottom:1px dashed var(--line); }
 .pub-item:last-child, .pres-item:last-child{ border-bottom:none; }
-.pub-authors{
-  font-size:.92rem;
-  color:var(--ink);
-}
+.pub-authors{ font-size:.92rem; color:var(--ink); }
 .pub-authors .me{ font-weight:700; }
 .pub-title{ color:var(--ink); }
-.pub-venue{
-  font-style:italic;
-  color:var(--ink-soft);
-  font-size:.9rem;
-  margin-top:4px;
-}
-.pub-links{
-  margin-top:8px;
-  display:flex;
-  gap:14px;
-}
-.pub-links a{ font-size:.82rem; font-weight:600; }
+.pub-venue{ font-style:italic; color:var(--ink-soft); font-size:.9rem; margin-top:4px; }
 .pres-badge{
-  display:inline-block;
-  font-size:.72rem;
-  font-weight:700;
-  letter-spacing:.03em;
-  text-transform:uppercase;
-  color:var(--accent);
-  background:var(--accent-tint);
-  padding:2px 9px;
-  border-radius:4px;
-  margin-bottom:8px;
+  display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-tint); padding:2px 9px; border-radius:4px; margin-bottom:8px;
+}
+.pub-note{ color:var(--ink-faint); font-size:.85rem; margin-top:16px; }
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+  gap:16px;
+}
+.gallery-grid figure{
+  margin:0;
+  border-radius:10px;
+  overflow:hidden;
+  aspect-ratio:4/3;
+  background:var(--bg-sidebar);
+  border:1px solid var(--line);
+  cursor:pointer;
+}
+.gallery-grid img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .3s ease;
+}
+.gallery-grid figure:hover img{ transform:scale(1.04); }
+.gallery-empty-note{
+  color:var(--ink-faint);
+  font-size:.88rem;
+  font-style:italic;
 }
 
-/* awards */
+/* lightbox */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.92);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  padding:24px;
+}
+.lightbox.open{ display:flex; }
+.lightbox img{
+  max-width:90vw;
+  max-height:85vh;
+  object-fit:contain;
+  border-radius:6px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+.lightbox-btn{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25);
+  color:#fff;
+  width:48px; height:48px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  font-size:1.4rem;
+  line-height:1;
+}
+.lightbox-btn:hover{ background:rgba(255,255,255,0.22); }
+.lightbox-prev{ left:24px; }
+.lightbox-next{ right:24px; }
+.lightbox-close{
+  position:fixed;
+  top:24px; right:24px;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25);
+  color:#fff;
+  width:40px; height:40px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  font-size:1.2rem;
+  line-height:1;
+}
+.lightbox-close:hover{ background:rgba(255,255,255,0.22); }
+.lightbox-counter{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  color:rgba(255,255,255,0.75);
+  font-family:var(--font-body);
+  font-size:.85rem;
+  letter-spacing:.04em;
+}
+@media (max-width:640px){
+  .lightbox-btn{ width:40px; height:40px; font-size:1.2rem; }
+  .lightbox-prev{ left:10px; }
+  .lightbox-next{ right:10px; }
+  .lightbox-close{ top:14px; right:14px; }
+}
+
 .award-row{
-  display:flex; justify-content:space-between; gap:12px;
-  padding:9px 0;
-  font-size:.92rem;
-  color:var(--ink-soft);
-  border-bottom:1px dashed var(--line);
+  display:flex; justify-content:space-between; gap:12px; padding:9px 0; font-size:.92rem;
+  color:var(--ink-soft); border-bottom:1px dashed var(--line);
 }
 .award-row:last-child{ border-bottom:none; }
 .award-row .yr{ color:var(--ink-faint); white-space:nowrap; font-size:.85rem; }
 
-/* skills */
-.skill-line{ padding:8px 0; border-bottom:1px dashed var(--line); font-size:.92rem; }
-.skill-line:last-child{ border-bottom:none; }
-.skill-line b{ color:var(--ink); }
+.skill-grid{ display:grid; grid-template-columns:1fr; gap:0; }
+@media (min-width:900px){ .skill-grid{ grid-template-columns:1fr 1fr; gap:0 40px; } }
+.skill-line{ padding:10px 0; border-bottom:1px dashed var(--line); font-size:.92rem; }
+.skill-line b{ color:var(--ink); display:block; margin-bottom:3px; }
 .skill-line span{ color:var(--ink-soft); }
 
-footer{
-  text-align:center;
-  padding:40px 0 60px;
-  color:var(--ink-faint);
-  font-size:.82rem;
-}
+footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-size:.82rem; border-top:1px solid var(--line); }
 
 .reveal{ opacity:0; transform:translateY(8px); transition:opacity .5s ease, transform .5s ease; }
 .reveal.in{ opacity:1; transform:translateY(0); }
@@ -310,250 +482,406 @@ footer{
 </head>
 <body>
 
-<nav class="topnav">
-  <div class="wrap">
-    <a href="#about">About</a>
-    <a href="#news">News</a>
-    <a href="#publications">Publications</a>
-    <a href="#presentations">Presentations</a>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+<div class="shell">
 
-<header class="profile">
-  <div class="wrap">
-    <div class="avatar">TP</div>
+  <aside class="sidebar">
+    <div class="avatar">TP<img src="photo.jpg" alt="Tahmina Sultana Priya" onerror="this.remove()"></div>
     <h1 class="pname">Tahmina Sultana Priya</h1>
-    <div class="ptitle">Ph.D. Candidate in Computer Science</div>
+    <div class="ptitle">Ph.D. Candidate, Computer Science</div>
     <div class="pinst">Virginia Tech</div>
+
     <div class="picons">
       <a href="mailto:tpriya@vt.edu"><svg class="picon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>Email</a>
-      <a href="https://www.linkedin.com/in/tahmina14/" target="_blank" rel="noopener"><svg class="picon" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 11-4-.002 2 2 0 014 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-3.96 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48z"/></svg>LinkedIn</a>
       <a href="https://scholar.google.com/citations?user=o9PoLqsAAAAJ&hl=en" target="_blank" rel="noopener"><svg class="picon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 8l11 6 9-4.91V17h2V8L12 2zM5 13.18v4.09L12 21l7-3.73v-4.09l-7 3.82-7-3.82z"/></svg>Google Scholar</a>
+      <a href="https://www.linkedin.com/in/tahmina14/" target="_blank" rel="noopener"><svg class="picon" viewBox="0 0 24 24" fill="currentColor"><path d="M19.5 3h-15A1.5 1.5 0 003 4.5v15A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0019.5 3zM9 17H6.5V10H9v7zm-1.25-8a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zM18 17h-2.5v-3.6c0-1.1-.02-2.5-1.5-2.5s-1.75 1.2-1.75 2.4V17H9.75V10h2.4v1.1h.03c.34-.6 1.15-1.3 2.37-1.3 2.53 0 3 1.7 3 3.9V17z"/></svg>LinkedIn</a>
       <a href="https://github.com/tpriya14" target="_blank" rel="noopener"><svg class="picon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.5A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</a>
       <a href="tel:+15408249427"><svg class="picon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>(+1) 540-824-9427</a>
     </div>
-  </div>
-</header>
 
-<!-- ============================================================
-     ABOUT SECTION
-     ============================================================ -->
-<section id="about">
-  <div class="wrap">
-    <h2 class="sec-title">About</h2>
-    <div class="bio reveal">
-      <p>Tahmina Sultana Priya is a Ph.D. Candidate in Computer Science at Virginia Tech. Her research focuses on machine learning for health, explainable AI, and precision medicine, with an emphasis on interpretable, algorithm-driven models for prognosis, subgroup discovery, and clinical outcome analysis in complex disorders.</p>
-      <p>She has experience as a bioinformatics research intern and has collaborated with the Mayo Clinic, where she worked with electronic health records and multi-omics data to advance precision medicine. She holds an M.S. from Virginia Tech and a B.Sc. from Khulna University of Engineering &amp; Technology, Bangladesh, both in Computer Science.</p>
-      <p>She is currently preparing for her Ph.D. defense and seeking research opportunities, with a long-term goal of pursuing a career in academia. She is a highly motivated and independent researcher with a strong work ethic and a passion for tackling new challenges to create meaningful societal impact. She also enjoys meeting new people, socializing, and traveling.</p>
+    <a class="cv-btn" href="CV.pdf" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      Download CV
+    </a>
+
+    <nav class="sidenav">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#presentations">Presentations</a>
+      <a href="#photos">Photos</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="theme-toggle" role="group" aria-label="Theme">
+      <button class="theme-btn" data-theme-choice="light" title="Light">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        Light
+      </button>
+      <button class="theme-btn" data-theme-choice="dark" title="Dark">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        Dark
+      </button>
+      <button class="theme-btn" data-theme-choice="auto" title="Match system">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+        Auto
+      </button>
     </div>
+  </aside>
 
-    <div class="about-grid reveal" id="education">
-      <div class="about-col">
-        <h3 class="sub-title">Interests</h3>
-        <ul class="plain-list">
-          <li>Machine Learning for Health</li>
-          <li>Explainable AI</li>
-          <li>Precision Medicine</li>
-          <li>EHR &amp; Genomic Data Integration</li>
-          <li>Subgroup Discovery</li>
-          <li>Clinical Outcome Prediction</li>
-        </ul>
-      </div>
-      <div class="about-col">
-        <h3 class="sub-title">Education</h3>
-        <div class="list-row" style="border-bottom:1px dashed var(--line);">
-          <div>
-            <div class="list-main">Ph.D. in Computer Science</div>
-            <div class="list-sub">Virginia Tech</div>
-          </div>
-          <div class="list-year">Exp. Dec 2026</div>
+  <main class="content">
+
+    <!-- ============================================================
+         ABOUT SECTION
+         ============================================================ -->
+    <section id="about">
+      <div class="inner">
+        <h2 class="sec-title">About</h2>
+        <div class="bio reveal">
+          <p>Tahmina Sultana Priya is a Ph.D. Candidate in Computer Science at Virginia Tech. Her research focuses on machine learning for health, explainable AI, and precision medicine, with an emphasis on interpretable, algorithm-driven models for prognosis, subgroup discovery, and clinical outcome analysis in complex disorders.</p>
+          <p>She has experience as a bioinformatics research intern and has collaborated with the Mayo Clinic, where she worked with electronic health records and multi-omics data to advance precision medicine. She holds an M.S. from Virginia Tech and a B.Sc. from Khulna University of Engineering &amp; Technology, Bangladesh, both in Computer Science.</p>
+          <p>She is currently preparing for her Ph.D. defense and seeking research opportunities, with a long-term goal of pursuing a career in academia. She is a highly motivated and independent researcher with a strong work ethic and a passion for tackling new challenges to create meaningful societal impact. She also enjoys meeting new people, socializing, and traveling.</p>
         </div>
-        <div class="list-row" style="border-bottom:1px dashed var(--line);">
-          <div>
-            <div class="list-main">M.Sc. in Computer Science</div>
-            <div class="list-sub">Virginia Tech &middot; GPA 4.00/4.00</div>
+
+        <div class="about-grid reveal">
+          <div class="about-col">
+            <h3 class="sub-title">Research Interests</h3>
+            <ul class="plain-list">
+              <li>Machine Learning for Health</li>
+              <li>Explainable AI</li>
+              <li>Precision Medicine</li>
+              <li>EHR &amp; Genomic Data Integration</li>
+              <li>Subgroup Discovery</li>
+              <li>Clinical Outcome Prediction</li>
+            </ul>
           </div>
-          <div class="list-year">May 2025</div>
-        </div>
-        <div class="list-row">
-          <div>
-            <div class="list-main">B.Sc. in Computer Science &amp; Engineering</div>
-            <div class="list-sub">Khulna Univ. of Eng. &amp; Tech. &middot; CGPA 3.77/4.00</div>
+          <div class="about-col" id="education">
+            <h3 class="sub-title">Education</h3>
+            <div class="list-row" style="border-bottom:1px dashed var(--line);">
+              <div>
+                <div class="list-main">Ph.D. in Computer Science</div>
+                <div class="list-sub">Virginia Tech</div>
+              </div>
+              <div class="list-year">Exp. Dec 2026</div>
+            </div>
+            <div class="list-row" style="border-bottom:1px dashed var(--line);">
+              <div>
+                <div class="list-main">M.Sc. in Computer Science</div>
+                <div class="list-sub">Virginia Tech &middot; GPA 4.00/4.00</div>
+              </div>
+              <div class="list-year">May 2025</div>
+            </div>
+            <div class="list-row">
+              <div>
+                <div class="list-main">B.Sc. in Computer Science &amp; Engineering</div>
+                <div class="list-sub">Khulna Univ. of Eng. &amp; Tech. &middot; CGPA 3.77/4.00</div>
+              </div>
+              <div class="list-year">Mar 2020</div>
+            </div>
           </div>
-          <div class="list-year">Mar 2020</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
-     NEWS SECTION — copy a .news-item block, newest first.
-     ============================================================ -->
-<section id="news">
-  <div class="wrap">
-    <h2 class="sec-title">News</h2>
+    <!-- ============================================================
+         EXPERIENCE SECTION — copy a .list-row block to add a role.
+         ============================================================ -->
+    <section id="experience">
+      <div class="inner">
+        <h2 class="sec-title">Experience</h2>
 
-    <div class="news-item reveal"><span class="news-date">[2026]</span> Our paper, <b>&ldquo;Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts,&rdquo;</b> was accepted to <i>Nature Communications</i>.</div>
-    <div class="news-item reveal"><span class="news-date">[2026]</span> Presenting <b>&ldquo;Prediction of Rapid Fibrosis Progression in MASLD with Interpretable Machine Learning Models&rdquo;</b> as a talk at <b>ICIBM 2026</b>.</div>
-    <div class="news-item reveal"><span class="news-date">[2026]</span> Presenting a poster, <b>&ldquo;Algorithm-Driven Precise and Explainable Prognosis for Complex Disorders,&rdquo;</b> at the <b>AHLI Summer Camp &amp; CHIL 2026</b>.</div>
-    <div class="news-item reveal"><span class="news-date">[2024&ndash;2025]</span> Awarded the <b>Pratt Fellowship</b> at Virginia Tech.</div>
-    <div class="news-item reveal"><span class="news-date">[2024]</span> Gave a lightning talk, <b>&ldquo;Latent Class Analysis-Based Identification of NAFLD Subtypes with Distinct Metabolic and Genetic Signatures,&rdquo;</b> at <b>MCBIOS 2024</b>.</div>
-  </div>
-</section>
+        <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
+          <div style="display:flex; justify-content:space-between; width:100%;">
+            <div class="list-main">Graduate Research Assistant</div>
+            <div class="list-year">May 2023 &ndash; Present</div>
+          </div>
+          <div class="list-sub">Virginia Tech, Department of Computer Science</div>
+          <ul class="list-desc">
+            <li>Analyze large-scale EHR, clinical, and genomic datasets to support precision medicine research.</li>
+            <li>Develop reproducible pipelines for healthcare data integration, preprocessing, and validation.</li>
+            <li>Build and evaluate predictive and statistical models for prognosis, risk stratification, and outcome prediction.</li>
+            <li>Apply explainable AI and subgroup modeling to identify clinical factors associated with disease progression.</li>
+          </ul>
+        </div>
 
-<!-- ============================================================
-     PUBLICATIONS SECTION — copy a .pub-item block to add a paper.
-     ============================================================ -->
-<section id="publications">
-  <div class="wrap">
-    <h2 class="sec-title">Publications</h2>
+        <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
+          <div style="display:flex; justify-content:space-between; width:100%;">
+            <div class="list-main">Bioinformatics Intern, Division of Computational Biology</div>
+            <div class="list-year">Jan&ndash;Aug 2024; May&ndash;Aug 2025</div>
+          </div>
+          <div class="list-sub">Mayo Clinic, Rochester, MN</div>
+          <ul class="list-desc">
+            <li>Analyzed EHR, clinical, and genomic data to identify factors associated with disease progression and patient outcomes.</li>
+            <li>Performed data preprocessing, integration, validation, and statistical analysis of large-scale biomedical datasets.</li>
+            <li>Developed predictive models for patient risk assessment, outcome prediction, and healthcare analytics.</li>
+            <li>Conducted survival and drug response analyses to support precision medicine research.</li>
+          </ul>
+        </div>
 
-    <div class="pub-item reveal">
-      <div class="pub-authors"><span class="me">Priya, T.S.</span> et al.</div>
-      <div class="pub-title">Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts</div>
-      <div class="pub-venue">Nature Communications, 2026 (Accepted)</div>
-    </div>
+        <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
+          <div style="display:flex; justify-content:space-between; width:100%;">
+            <div class="list-main">Graduate Teaching Assistant</div>
+            <div class="list-year">Jan&ndash;Dec 2023</div>
+          </div>
+          <div class="list-sub">Virginia Tech, Department of Computer Science</div>
+          <ul class="list-desc">
+            <li>Assisted instruction for Data Structures, Computer Organization, and Android Development courses.</li>
+            <li>Evaluated assignments and provided technical guidance to students.</li>
+          </ul>
+        </div>
 
-    <div class="pub-item reveal">
-      <div class="pub-authors"><span class="me">Priya, T.S.</span> et al.</div>
-      <div class="pub-title">Deep Phenotyping of Non-Alcoholic Fatty Liver Disease Patients with Genetic Factors for Insights into the Complex Disease</div>
-      <div class="pub-venue">Machine Learning for Health (ML4H), 2023</div>
-    </div>
-  </div>
-</section>
+        <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
+          <div style="display:flex; justify-content:space-between; width:100%;">
+            <div class="list-main">Lecturer, Department of Computer Science and Engineering</div>
+            <div class="list-year">Jan 2021 &ndash; Dec 2022</div>
+          </div>
+          <div class="list-sub">Daffodil International University, Dhaka</div>
+          <ul class="list-desc">
+            <li>Taught undergraduate courses including Web Engineering, Data Mining, Machine Learning, Software Engineering, Digital Electronics, and Data Communication.</li>
+            <li>Instructed over 200 students and supervised software development and research projects.</li>
+          </ul>
+        </div>
 
-<!-- ============================================================
-     PRESENTATIONS SECTION — copy a .pres-item block to add one.
-     ============================================================ -->
-<section id="presentations">
-  <div class="wrap">
-    <h2 class="sec-title">Presentations</h2>
-
-    <div class="pres-item reveal">
-      <span class="pres-badge">Talk &middot; ICIBM 2026</span>
-      <div class="pub-title">Prediction of Rapid Fibrosis Progression in Metabolic Dysfunction&ndash;Associated Steatotic Liver Disease with Interpretable Machine Learning Models</div>
-    </div>
-
-    <div class="pres-item reveal">
-      <span class="pres-badge">Talk (Lightning) &middot; MCBIOS 2024</span>
-      <div class="pub-title">Latent Class Analysis-Based Identification of Non-Alcoholic Fatty Liver Disease Subtypes with Distinct Metabolic and Genetic Signatures</div>
-    </div>
-
-    <div class="pres-item reveal">
-      <span class="pres-badge">Poster &middot; AHLI Summer Camp &amp; CHIL 2026</span>
-      <div class="pub-title">Algorithm-Driven Precise and Explainable Prognosis for Complex Disorders</div>
-    </div>
-
-    <div class="pres-item reveal">
-      <span class="pres-badge">Poster &middot; ISMB 2024</span>
-      <div class="pub-title">Subtyping of Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD) by Real-World Integration of Electronic Health Records and Population Genomics Data</div>
-    </div>
-
-    <div class="pres-item reveal">
-      <span class="pres-badge">Poster &middot; ML4H &amp; Women in ML, Virginia Tech</span>
-      <div class="pub-title">Deep Phenotyping of Non-Alcoholic Fatty Liver Disease Patients with Genetic Factors for Insights into the Complex Disease</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     EXPERIENCE SECTION — copy a .list-row block to add a role.
-     ============================================================ -->
-<section id="experience">
-  <div class="wrap">
-    <h2 class="sec-title">Experience</h2>
-
-    <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
-      <div style="display:flex; justify-content:space-between; width:100%;">
-        <div class="list-main">Graduate Research Assistant</div>
-        <div class="list-year">May 2023 &ndash; Present</div>
+        <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
+          <div style="display:flex; justify-content:space-between; width:100%;">
+            <div class="list-main">System Engineer &amp; Senior Software Engineer</div>
+            <div class="list-year">Aug 2020 &ndash; Dec 2022</div>
+          </div>
+          <div class="list-sub">Vertical Innovations Limited, Dhaka</div>
+          <ul class="list-desc">
+            <li>Led development of scalable web applications using Django and Nuxt.js.</li>
+            <li>Developed Python-based analytics dashboards, visualization tools, and cloud-based solutions.</li>
+            <li>Designed IoT-based data collection systems and supported software deployment and operations.</li>
+          </ul>
+        </div>
       </div>
-      <div class="list-sub">Virginia Tech, Department of Computer Science</div>
-      <ul class="list-desc">
-        <li>Analyze large-scale EHR, clinical, and genomic datasets to support precision medicine research.</li>
-        <li>Build and evaluate predictive, explainable models for prognosis and risk stratification.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
-      <div style="display:flex; justify-content:space-between; width:100%;">
-        <div class="list-main">Bioinformatics Intern, Division of Computational Biology</div>
-        <div class="list-year">2024 &ndash; 2025</div>
+    <!-- ============================================================
+         NEWS SECTION — copy a .news-item block, newest first.
+         ============================================================ -->
+    <section id="news">
+      <div class="inner">
+        <h2 class="sec-title">News</h2>
+
+        <div class="news-item reveal"><span class="news-date">[2026]</span> Our paper, <b>&ldquo;Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts,&rdquo;</b> was accepted to <i>Nature Communications</i>.</div>
+        <div class="news-item reveal"><span class="news-date">[2026]</span> Presenting <b>&ldquo;Prediction of Rapid Fibrosis Progression in MASLD with Interpretable Machine Learning Models&rdquo;</b> as a talk at <b>ICIBM 2026</b>.</div>
+        <div class="news-item reveal"><span class="news-date">[2026]</span> Presenting a poster, <b>&ldquo;Algorithm-Driven Precise and Explainable Prognosis for Complex Disorders,&rdquo;</b> at the <b>AHLI Summer Camp &amp; CHIL 2026</b>.</div>
+        <div class="news-item reveal"><span class="news-date">[2024&ndash;2025]</span> Awarded the <b>Pratt Fellowship</b> at Virginia Tech.</div>
+        <div class="news-item reveal"><span class="news-date">[2024]</span> Gave a lightning talk, <b>&ldquo;Latent Class Analysis-Based Identification of NAFLD Subtypes with Distinct Metabolic and Genetic Signatures,&rdquo;</b> at <b>MCBIOS 2024</b>.</div>
       </div>
-      <div class="list-sub">Mayo Clinic, Rochester, MN</div>
-      <ul class="list-desc">
-        <li>Analyzed EHR, clinical, and genomic data to identify factors driving disease progression.</li>
-        <li>Developed predictive models for risk assessment and conducted survival and drug response analyses.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
-      <div style="display:flex; justify-content:space-between; width:100%;">
-        <div class="list-main">Graduate Teaching Assistant</div>
-        <div class="list-year">2023</div>
+    <!-- ============================================================
+         PUBLICATIONS SECTION — copy a .pub-item block to add more.
+         ============================================================ -->
+    <section id="publications">
+      <div class="inner-wide">
+        <h2 class="sec-title">Publications</h2>
+
+        <div class="pub-grid">
+          <div class="pub-item reveal">
+            <div class="pub-authors"><span class="me">Priya, T.S.</span> et al.</div>
+            <div class="pub-title">Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts</div>
+            <div class="pub-venue">Nature Communications, 2026 (Accepted)</div>
+          </div>
+
+          <div class="pub-item reveal">
+            <div class="pub-authors"><span class="me">Priya, T.S.</span> et al.</div>
+            <div class="pub-title">Deep Phenotyping of Non-Alcoholic Fatty Liver Disease Patients with Genetic Factors for Insights into the Complex Disease</div>
+            <div class="pub-venue">Machine Learning for Health (ML4H), 2023</div>
+          </div>
+        </div>
       </div>
-      <div class="list-sub">Virginia Tech, Department of Computer Science</div>
-    </div>
+    </section>
 
-    <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
-      <div style="display:flex; justify-content:space-between; width:100%;">
-        <div class="list-main">Lecturer, Department of Computer Science and Engineering</div>
-        <div class="list-year">2021 &ndash; 2022</div>
+    <!-- ============================================================
+         PRESENTATIONS SECTION — copy a .pres-item block to add one.
+         ============================================================ -->
+    <section id="presentations">
+      <div class="inner-wide">
+        <h2 class="sec-title">Presentations</h2>
+
+        <div class="pres-grid">
+          <div class="pres-item reveal">
+            <span class="pres-badge">Talk &middot; ICIBM 2026</span>
+            <div class="pub-title">Prediction of Rapid Fibrosis Progression in Metabolic Dysfunction&ndash;Associated Steatotic Liver Disease with Interpretable Machine Learning Models</div>
+          </div>
+
+          <div class="pres-item reveal">
+            <span class="pres-badge">Talk (Lightning) &middot; MCBIOS 2024</span>
+            <div class="pub-title">Latent Class Analysis-Based Identification of Non-Alcoholic Fatty Liver Disease Subtypes with Distinct Metabolic and Genetic Signatures</div>
+          </div>
+
+          <div class="pres-item reveal">
+            <span class="pres-badge">Poster &middot; AHLI Summer Camp &amp; CHIL 2026</span>
+            <div class="pub-title">Algorithm-Driven Precise and Explainable Prognosis for Complex Disorders</div>
+          </div>
+
+          <div class="pres-item reveal">
+            <span class="pres-badge">Poster &middot; ISMB 2024</span>
+            <div class="pub-title">Subtyping of Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD) by Real-World Integration of Electronic Health Records and Population Genomics Data</div>
+          </div>
+
+          <div class="pres-item reveal">
+            <span class="pres-badge">Poster &middot; ML4H &amp; Women in ML, Virginia Tech</span>
+            <div class="pub-title">Deep Phenotyping of Non-Alcoholic Fatty Liver Disease Patients with Genetic Factors for Insights into the Complex Disease</div>
+          </div>
+        </div>
       </div>
-      <div class="list-sub">Daffodil International University, Dhaka</div>
-    </div>
+    </section>
 
-    <div class="list-row reveal" style="flex-direction:column; align-items:flex-start;">
-      <div style="display:flex; justify-content:space-between; width:100%;">
-        <div class="list-main">System Engineer &amp; Senior Software Engineer</div>
-        <div class="list-year">2020 &ndash; 2022</div>
+    <!-- ============================================================
+         PHOTOS SECTION — auto-loads images by filename, no code
+         editing needed. See instructions in the header comment.
+         ============================================================ -->
+    <section id="photos">
+      <div class="inner-wide">
+        <h2 class="sec-title">Photos</h2>
+        <div class="gallery-grid" id="galleryGrid">
+          <figure><img src="presentation-1.jpg" alt="Conference presentation photo 1" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-2.jpg" alt="Conference presentation photo 2" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-3.jpg" alt="Conference presentation photo 3" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-4.jpg" alt="Conference presentation photo 4" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-5.jpg" alt="Conference presentation photo 5" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-6.jpg" alt="Conference presentation photo 6" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-7.jpg" alt="Conference presentation photo 7" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-8.jpg" alt="Conference presentation photo 8" onerror="this.closest('figure').style.display='none'"></figure>
+        </div>
+        <p class="gallery-empty-note reveal" id="galleryEmptyNote" style="display:none;">No photos uploaded yet — see the instructions in the file's HTML comments for how to add some.</p>
       </div>
-      <div class="list-sub">Vertical Innovations Limited, Dhaka</div>
+    </section>
+
+    <!-- lightbox modal for the photo gallery -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+      <button class="lightbox-btn lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8249;</button>
+      <img id="lightboxImg" src="" alt="">
+      <button class="lightbox-btn lightbox-next" id="lightboxNext" aria-label="Next photo">&#8250;</button>
+      <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
-  </div>
-</section>
 
-<!-- ============================================================
-     AWARDS SECTION
-     ============================================================ -->
-<section id="awards">
-  <div class="wrap">
-    <h2 class="sec-title">Awards &amp; Honors</h2>
-    <div class="award-row reveal"><span>Pratt Fellowship, Virginia Tech</span><span class="yr">2024&ndash;2025</span></div>
-    <div class="award-row reveal"><span>Dean's Award, Khulna University of Engineering &amp; Technology</span><span class="yr">2017&ndash;18, 2019&ndash;20</span></div>
-    <div class="award-row reveal"><span>1st Runner-up, Textile Fest KUET &mdash; Fire-fighting Robot Project</span><span class="yr">&nbsp;</span></div>
-    <div class="award-row reveal"><span>Government Scholarships, Bangladesh (General and Talent Pool)</span><span class="yr">&nbsp;</span></div>
-  </div>
-</section>
+    <!-- ============================================================
+         AWARDS & HONORS SECTION
+         ============================================================ -->
+    <section id="awards">
+      <div class="inner">
+        <h2 class="sec-title">Awards &amp; Honors</h2>
+        <div class="award-row reveal"><span>Pratt Fellowship, Virginia Tech</span><span class="yr">2024&ndash;2025</span></div>
+        <div class="award-row reveal"><span>Dean's Award, Khulna University of Engineering &amp; Technology</span><span class="yr">2017&ndash;18, 2019&ndash;20</span></div>
+        <div class="award-row reveal"><span>1st Runner-up, Textile Fest KUET &mdash; Fire-fighting Robot Project</span><span class="yr">&nbsp;</span></div>
+        <div class="award-row reveal"><span>Government Scholarships, Bangladesh (General and Talent Pool)</span><span class="yr">&nbsp;</span></div>
+      </div>
+    </section>
 
-<!-- ============================================================
-     SKILLS SECTION
-     ============================================================ -->
-<section id="skills">
-  <div class="wrap">
-    <h2 class="sec-title">Technical Skills</h2>
-    <div class="skill-line reveal"><b>Programming:</b> <span>Python, R, SQL, C/C++, Java</span></div>
-    <div class="skill-line reveal"><b>ML &amp; Statistics:</b> <span>Predictive Modeling, Survival Analysis, Explainable AI, Deep Learning, PyTorch, Scikit-learn</span></div>
-    <div class="skill-line reveal"><b>Databases:</b> <span>SQL, MySQL, PostgreSQL</span></div>
-    <div class="skill-line reveal"><b>Tools:</b> <span>Git, Linux/Unix, Jupyter, HPC, VS Code</span></div>
-  </div>
-</section>
+    <!-- ============================================================
+         SKILLS SECTION
+         ============================================================ -->
+    <section id="skills">
+      <div class="inner-wide">
+        <h2 class="sec-title">Technical Skills</h2>
+        <div class="skill-grid">
+          <div class="skill-line reveal"><b>Programming</b><span>Python, R, SQL, C/C++, Java</span></div>
+          <div class="skill-line reveal"><b>ML &amp; Statistics</b><span>Predictive Modeling, Statistical Learning, Survival Analysis, Risk Prediction, Large Language Models, Explainable AI, Deep Learning, PyTorch, Scikit-learn</span></div>
+          <div class="skill-line reveal"><b>Databases</b><span>SQL, MySQL, PostgreSQL</span></div>
+          <div class="skill-line reveal"><b>Tools &amp; Platforms</b><span>Git, Linux/Unix, Jupyter Notebook, HPC, VS Code</span></div>
+        </div>
+      </div>
+    </section>
 
-<footer id="contact">
-  <div class="wrap">
-    tpriya@vt.edu &nbsp;&middot;&nbsp; Blacksburg, VA, USA
-  </div>
-</footer>
+    <footer id="contact">
+      tpriya@vt.edu &nbsp;&middot;&nbsp; Blacksburg, VA, USA
+    </footer>
+
+  </main>
+</div>
 
 <script>
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // theme toggle
+  const themeBtns = document.querySelectorAll('.theme-btn');
+  function applyActiveState(){
+    const current = localStorage.getItem('theme') || 'auto';
+    themeBtns.forEach(b => b.classList.toggle('active', b.dataset.themeChoice === current));
+  }
+  themeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const choice = btn.dataset.themeChoice;
+      localStorage.setItem('theme', choice);
+      document.documentElement.setAttribute('data-theme', choice);
+      applyActiveState();
+    });
+  });
+  applyActiveState();
+
+  // photos gallery: show a note if no photos uploaded, and power the lightbox
+  (function(){
+    const grid = document.getElementById('galleryGrid');
+    const note = document.getElementById('galleryEmptyNote');
+    const imgs = Array.from(grid.querySelectorAll('img'));
+    let pending = imgs.length;
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const btnPrev = document.getElementById('lightboxPrev');
+    const btnNext = document.getElementById('lightboxNext');
+    const btnClose = document.getElementById('lightboxClose');
+    let validImgs = [];
+    let currentIndex = 0;
+
+    function openLightbox(index){
+      currentIndex = index;
+      lightboxImg.src = validImgs[currentIndex].src;
+      lightboxImg.alt = validImgs[currentIndex].alt;
+      lightboxCounter.textContent = (currentIndex + 1) + ' / ' + validImgs.length;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function showNext(){ openLightbox((currentIndex + 1) % validImgs.length); }
+    function showPrev(){ openLightbox((currentIndex - 1 + validImgs.length) % validImgs.length); }
+
+    btnNext.addEventListener('click', showNext);
+    btnPrev.addEventListener('click', showPrev);
+    btnClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    function checkDone(){
+      pending--;
+      if (pending <= 0) {
+        validImgs = imgs.filter(img => img.closest('figure').style.display !== 'none');
+        if (validImgs.length === 0) {
+          note.style.display = 'block';
+        } else {
+          validImgs.forEach((img, i) => {
+            img.closest('figure').addEventListener('click', () => openLightbox(i));
+          });
+        }
+      }
+    }
+    imgs.forEach(img => {
+      if (img.complete) { checkDone(); }
+      else {
+        img.addEventListener('load', checkDone, { once:true });
+        img.addEventListener('error', checkDone, { once:true });
+      }
+    });
+  })();
 </script>
 
 </body>
