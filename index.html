@@ -363,14 +363,19 @@ h3.sub-title{ font-family:var(--font-heading); font-size:1.02rem; font-weight:60
 .news-item .news-date{ font-weight:700; color:var(--ink); }
 .news-item b{ color:var(--ink); }
 
-/* publications & presentations: 2-column grid on wide screens */
-.pub-grid, .pres-grid{
+/* publications: always stacked, one after another */
+.pub-grid{
+  display:grid;
+  grid-template-columns:1fr;
+}
+/* presentations: 2-column grid on wide screens */
+.pres-grid{
   display:grid;
   grid-template-columns:1fr;
   gap:0 40px;
 }
 @media (min-width:1000px){
-  .pub-grid, .pres-grid{ grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); }
+  .pres-grid{ grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); }
 }
 .pub-item, .pres-item{ padding:18px 0; border-bottom:1px dashed var(--line); }
 .pub-item:last-child, .pres-item:last-child{ border-bottom:none; }
@@ -561,9 +566,10 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
       <div class="inner">
         <h2 class="sec-title">About</h2>
         <div class="bio reveal">
-          <p>Tahmina Sultana Priya is a Ph.D. Candidate in Computer Science at Virginia Tech, driven by a deep curiosity about how machine learning can be made trustworthy enough to actually change a clinical decision. Her research focuses on machine learning for health, explainable AI, and precision medicine, with an emphasis on interpretable, algorithm-driven models for prognosis, subgroup discovery, and clinical outcome analysis in complex disorders &mdash; work she pursues with genuine enthusiasm for turning messy, real-world clinical data into insight that clinicians can act on.</p>
-          <p>She has experience as a bioinformatics research intern and has collaborated with the Mayo Clinic, where she worked with electronic health records and multi-omics data to advance precision medicine. She holds an M.S. from Virginia Tech and a B.Sc. from Khulna University of Engineering &amp; Technology, Bangladesh, both in Computer Science.</p>
-          <p><strong>She is currently preparing for her Ph.D. defense and is actively seeking postdoctoral and new research positions</strong>, with a long-term goal of pursuing a career in academia. She is a highly motivated and independent researcher with a strong work ethic, a genuine passion for tackling hard, unsolved problems, and a drive to create meaningful societal impact through her work. She also enjoys meeting new people, socializing, and traveling.</p>
+          <p>Tahmina Sultana Priya is a Ph.D. Candidate in Computer Science at Virginia Tech. Her research is driven by a simple question: how can we make machine learning reliable and understandable enough to actually help clinicians make better decisions? Her work focuses on machine learning for healthcare, explainable AI, and precision medicine. She is particularly interested in developing models that can help with prognosis, identify meaningful patient subgroups, and better understand clinical outcomes in complex diseases. What she enjoys most about research is working with real-world clinical data and finding patterns that can lead to insights that are useful in practice.</p>
+          <p>During her research journey, she has worked as a bioinformatics research intern and collaborated with the Mayo Clinic, gaining experience working with electronic health records and multi-omics data. These experiences have strengthened her interest in using computational methods to address challenging problems in healthcare and precision medicine.</p>
+          <p>She earned her M.S. in Computer Science from Virginia Tech and her B.Sc. in Computer Science and Engineering from Khulna University of Engineering &amp; Technology in Bangladesh.<strong>She is currently preparing for her Ph.D. defense and looking for postdoctoral or research opportunities</strong> where she can continue exploring meaningful problems at the intersection of machine learning and healthcare. In the long term, she hopes to build a career in academia, where she can pursue independent research, mentor students, and contribute to research that has a meaningful impact on people&rsquo;s lives.</p>
+          <p>Outside of research, Tahmina enjoys meeting new people, spending time with friends, traveling, and exploring new places. She is naturally curious, enjoys learning from others, and is always up for a good conversation or a challenging problem.</p>
         </div>
 
         <div class="about-grid reveal">
@@ -619,7 +625,7 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
             <div class="list-main">Graduate Research Assistant</div>
             <div class="list-year">May 2023 &ndash; Present</div>
           </div>
-          <div class="list-sub">Virginia Tech, Department of Computer Science &middot; Advisor: <a href="https://yaogroup.cs.vt.edu/index.html">Dr. Danfeng (Daphne) Yao</a></div>
+          <div class="list-sub">Virginia Tech, Department of Computer Science &middot; Supervisor: [Advisor Name]</div>
           <div class="list-stack">Python &middot; R &middot; SQL &middot; Machine Learning &middot; EHR Data Analytics</div>
           <ul class="list-desc">
             <li>Analyze large-scale EHR, clinical, and genomic datasets to support precision medicine research.</li>
@@ -634,7 +640,7 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
             <div class="list-main">Bioinformatics Intern, Division of Computational Biology</div>
             <div class="list-year">Jan&ndash;Aug 2024; May&ndash;Aug 2025</div>
           </div>
-          <div class="list-sub">Mayo Clinic, Rochester, MN &middot; Supervisor: <a href="https://www.mayo.edu/research/faculty/tian-shulan-ph-d-m-s/bio-20524328">Dr. Shulan Tian</a></div>
+          <div class="list-sub">Mayo Clinic, Rochester, MN &middot; Supervisor: [Supervisor Name]</div>
           <div class="list-stack">Python &middot; R &middot; SQL &middot; Clinical &amp; Genomic Data Analysis</div>
           <ul class="list-desc">
             <li>Analyzed EHR, clinical, and genomic data to identify factors associated with disease progression and patient outcomes.</li>
@@ -717,9 +723,15 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
           </div>
 
           <div class="pub-item reveal">
-            <div class="pub-authors"><span class="me">Priya, T.S.</span> et al.</div>
+            <div class="pub-authors">Pias, T.S., Song, W., <span class="me">Priya, T.S.</span>, Dudani, S., Marchany, R., Tilley, B., Wang, L., et al.</div>
+            <div class="pub-title">On the Readiness of Enterprise-scale Log Analysis Solutions Against Advanced Persistent Threats</div>
+            <div class="pub-venue">IEEE Secure Development (SecDev) Conference, 2025</div>
+          </div>
+
+          <div class="pub-item reveal">
+            <div class="pub-authors"><span class="me">Priya, T.S.</span>, Leng, F., Luehrs, A.C., Klee, E.W., Allen, A.M., Lazaridis, K.N., Tian, S.</div>
             <div class="pub-title">Deep Phenotyping of Non-Alcoholic Fatty Liver Disease Patients with Genetic Factors for Insights into the Complex Disease</div>
-            <div class="pub-venue">Machine Learning for Health (ML4H), 2023</div>
+            <div class="pub-venue">Machine Learning for Health (ML4H), 2023; arXiv:2311.08428</div>
           </div>
         </div>
       </div>
