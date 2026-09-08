@@ -26,25 +26,25 @@
      visitor's browser via localStorage — each visitor sees their
      own last choice; "Auto" follows their OS setting.
   7. PROFILE PHOTO: to add your photo, upload an image file named
-     exactly "photo.jpeg" (or "photo.jpeg" — both work
+     exactly "photo.jpg" (or "photo.jpeg" — both work
      automatically) into the SAME folder as this index.html file
      on GitHub (repo root, next to index.html — not in a
      subfolder). It will automatically appear in the circular
      avatar, cropped to fill it. No code editing needed. Until
      you upload one, it shows your initials ("TP") instead. If
-     your file is a .png instead, either rename it to photo.jpeg,
-     or change src="photo.jpeg" to src="photo.png" in the
+     your file is a .png instead, either rename it to photo.jpg,
+     or change src="photo.jpg" to src="photo.png" in the
      <div class="avatar"> line below.
   8. PRESENTATION / CONFERENCE PHOTOS: works the same way. Upload
-     image files named exactly "presentation-1.jpeg",
-     "presentation-2.jpeg", "presentation-3.jpeg" ... up to
-     "presentation-20.jpeg" (up to 20 photos) into the SAME folder
+     image files named exactly "presentation-1.jpg",
+     "presentation-2.jpg", "presentation-3.jpg" ... up to
+     "presentation-20.jpg" (up to 20 photos) into the SAME folder
      as this index.html file (repo root). Each one you upload
      automatically appears in the "Photos" section grid — no
      code editing, no need to upload all 20, missing numbers are
      simply skipped. Need more than 20? Copy a
-     <figure><img src="presentation-21.jpeg" ...></figure> line in
-     the Photos section below and add "presentation-21.jpeg" etc.
+     <figure><img src="presentation-21.jpg" ...></figure> line in
+     the Photos section below and add "presentation-21.jpg" etc.
   9. DOWNLOADABLE CV: upload a PDF named exactly "CV.pdf" into
      the SAME folder as this index.html file (repo root). The
      "Download CV" button in the sidebar will then work
@@ -383,6 +383,8 @@ h3.sub-title{ font-family:var(--font-heading); font-size:1.02rem; font-weight:60
 .pub-authors .me{ font-weight:700; }
 .pub-title{ color:var(--ink); }
 .pub-venue{ font-style:italic; color:var(--ink-soft); font-size:.9rem; margin-top:4px; }
+.pub-links{ margin-top:8px; }
+.pub-links a{ font-size:.85rem; font-weight:600; }
 .pres-badge{
   display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
   color:var(--accent); background:var(--accent-tint); padding:2px 9px; border-radius:4px; margin-bottom:8px;
@@ -507,7 +509,7 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
 <div class="shell">
 
   <aside class="sidebar">
-    <div class="avatar">TP<img src="photo.jpeg" alt="Tahmina Sultana Priya" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='photo.jpeg';}else{this.remove();}"></div>
+    <div class="avatar">TP<img src="photo.jpg" alt="Tahmina Sultana Priya" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='photo.jpeg';}else{this.remove();}"></div>
     <h1 class="pname">Tahmina Sultana Priya</h1>
     <div class="ptitle">Ph.D. Candidate, Computer Science</div>
     <div class="pinst">Virginia Tech</div>
@@ -519,7 +521,7 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
       <a href="https://github.com/tpriya14" target="_blank" rel="noopener"><svg class="picon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.8-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.5A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</a>
       <button type="button" class="picons-btn" id="phoneReveal">
         <svg class="picon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        <span id="phoneLabel">Contact number</span>
+        <span id="phoneLabel">Show phone number</span>
       </button>
     </div>
 
@@ -566,9 +568,12 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
       <div class="inner">
         <h2 class="sec-title">About</h2>
         <div class="bio reveal">
-          <p>Tahmina Sultana Priya is a Ph.D. Candidate in Computer Science at Virginia Tech. Her research is driven by a simple question: how can we make machine learning reliable and understandable enough to actually help clinicians make better decisions? Her work focuses on machine learning for healthcare, explainable AI, and precision medicine. She is particularly interested in developing models that can help with prognosis, identify meaningful patient subgroups, and better understand clinical outcomes in complex diseases. What she enjoys most about research is working with real-world clinical data and finding patterns that can lead to insights that are useful in practice. During her research journey, she has worked as a bioinformatics research intern and collaborated with the Mayo Clinic, gaining experience working with electronic health records and multi-omics data. These experiences have strengthened her interest in using computational methods to address challenging problems in healthcare and precision medicine.</p>
-          <p>She earned her M.S. in Computer Science from Virginia Tech and her B.Sc. in Computer Science and Engineering from Khulna University of Engineering &amp; Technology in Bangladesh.<strong>She is currently preparing for her Ph.D. defense and looking for postdoctoral or research opportunities</strong> where she can continue exploring meaningful problems at the intersection of machine learning and healthcare. In the long term, she hopes to build a career in academia, where she can pursue independent research, mentor students, and contribute to research that has a meaningful impact on people&rsquo;s lives.</p>
-          <p>Tahmina is a hardworking and independent researcher who takes her work seriously and has a strong sense of responsibility toward what she does. She values honesty, consistency, and strong work ethics in her research and professional life. At the same time, she enjoys meeting new people, spending time with friends, traveling, and exploring new places.</p>
+          <p>Tahmina Sultana Priya is a Ph.D. Candidate in Computer Science at Virginia Tech. Her research is driven by a simple question: how can we make machine learning reliable and understandable enough to actually help clinicians make better decisions?</p>
+          <p>Her work focuses on machine learning for healthcare, explainable AI, and precision medicine. She is particularly interested in developing models that can help with prognosis, identify meaningful patient subgroups, and better understand clinical outcomes in complex diseases. What she enjoys most about research is working with real-world clinical data and finding patterns that can lead to insights that are useful in practice.</p>
+          <p>During her research journey, she has worked as a bioinformatics research intern and collaborated with the Mayo Clinic, gaining experience working with electronic health records and multi-omics data. These experiences have strengthened her interest in using computational methods to address challenging problems in healthcare and precision medicine.</p>
+          <p>She earned her M.S. in Computer Science from Virginia Tech and her B.Sc. in Computer Science and Engineering from Khulna University of Engineering &amp; Technology in Bangladesh.</p>
+          <p><strong>She is currently preparing for her Ph.D. defense and looking for postdoctoral or research opportunities</strong> where she can continue exploring meaningful problems at the intersection of machine learning and healthcare. In the long term, she hopes to build a career in academia, where she can pursue independent research, mentor students, and contribute to research that has a meaningful impact on people&rsquo;s lives.</p>
+          <p>Outside of research, Tahmina enjoys meeting new people, spending time with friends, traveling, and exploring new places. She is naturally curious, enjoys learning from others, and is always up for a good conversation or a challenging problem.</p>
         </div>
 
         <div class="about-grid reveal">
@@ -698,7 +703,7 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
       <div class="inner">
         <h2 class="sec-title">News</h2>
 
-        <div class="news-item reveal"><span class="news-date">[2026]</span> Our paper, <b>&ldquo;Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts,&rdquo;</b> was accepted to <i>Nature Communications</i>.</div>
+        <div class="news-item reveal"><span class="news-date">[Sep 2026]</span> Our paper, <b>&ldquo;Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts Reveals Diverse Etiologies and Progression,&rdquo;</b> was published in <i>Nature Communications</i> and covered by <a href="https://medicalxpress.com/news/2026-09-subtypes-common-liver-disease-rapidly.html" target="_blank" rel="noopener">MedicalXpress</a>, EurekAlert!, and several other news outlets.</div>
         <div class="news-item reveal"><span class="news-date">[2026]</span> Presenting <b>&ldquo;Prediction of Rapid Fibrosis Progression in MASLD with Interpretable Machine Learning Models&rdquo;</b> as a talk at <b>ICIBM 2026</b>.</div>
         <div class="news-item reveal"><span class="news-date">[2026]</span> Presenting a poster, <b>&ldquo;Algorithm-Driven Precise and Explainable Prognosis for Complex Disorders,&rdquo;</b> at the <b>AHLI Summer Camp &amp; CHIL 2026</b>.</div>
         <div class="news-item reveal"><span class="news-date">[2024&ndash;2025]</span> Awarded the <b>Pratt Fellowship</b> at Virginia Tech.</div>
@@ -713,13 +718,13 @@ footer{ text-align:center; padding:40px 0 56px; color:var(--ink-faint); font-siz
     <section id="publications">
       <div class="inner-wide">
         <h2 class="sec-title">Publications</h2>
+
         <div class="pub-grid">
           <div class="pub-item reveal">
-            <div class="pub-authors"><span class="me">Tahmina Sultana Priya</span>, Huihuang Yan, Kirk J. Wangensteen, Stephen Wu, Anthony C. Luehrs,
-Filippo Pinto e Vairo, Fan Leng, Andres J. Acosta, Robert A. Vierkant, Alina M. Allen, Konstantinos
-N. Lazaridis, Eric W. Klee, Danfeng (Daphne) Yao, Shulan Tian </div>
-            <div class="pub-title">Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts</div>
-            <div class="pub-venue">Nature Communications, 2026 (Accepted)</div>
+            <div class="pub-authors"><span class="me">Priya, T.S.</span> et al.</div>
+            <div class="pub-title">Subtyping Metabolic Dysfunction-Associated Steatotic Liver Disease using Electronic Health Record-Linked Genomic Cohorts Reveals Diverse Etiologies and Progression</div>
+            <div class="pub-venue">Nature Communications, 2026</div>
+            <div class="pub-links"><a href="https://www.nature.com/articles/s41467-026-77410-6" target="_blank" rel="noopener">Read paper &rarr;</a></div>
           </div>
 
           <div class="pub-item reveal">
@@ -781,26 +786,26 @@ N. Lazaridis, Eric W. Klee, Danfeng (Daphne) Yao, Shulan Tian </div>
       <div class="inner-wide">
         <h2 class="sec-title">Photos</h2>
         <div class="gallery-grid" id="galleryGrid">
-          <figure><img src="presentation-1.jpeg" alt="Conference presentation photo 1" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-2.jpeg" alt="Conference presentation photo 2" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-3.jpeg" alt="Conference presentation photo 3" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-4.jpeg" alt="Conference presentation photo 4" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-5.jpeg" alt="Conference presentation photo 5" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-6.jpeg" alt="Conference presentation photo 6" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-7.jpeg" alt="Conference presentation photo 7" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-8.jpeg" alt="Conference presentation photo 8" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-9.jpeg" alt="Conference presentation photo 9" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-10.jpeg" alt="Conference presentation photo 10" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-11.jpeg" alt="Conference presentation photo 11" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-12.jpeg" alt="Conference presentation photo 12" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-13.jpeg" alt="Conference presentation photo 13" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-14.jpeg" alt="Conference presentation photo 14" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-15.jpeg" alt="Conference presentation photo 15" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-16.jpeg" alt="Conference presentation photo 16" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-17.jpeg" alt="Conference presentation photo 17" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-18.jpeg" alt="Conference presentation photo 18" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-19.jpeg" alt="Conference presentation photo 19" onerror="this.closest('figure').style.display='none'"></figure>
-          <figure><img src="presentation-20.jpeg" alt="Conference presentation photo 20" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-1.jpg" alt="Conference presentation photo 1" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-2.jpg" alt="Conference presentation photo 2" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-3.jpg" alt="Conference presentation photo 3" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-4.jpg" alt="Conference presentation photo 4" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-5.jpg" alt="Conference presentation photo 5" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-6.jpg" alt="Conference presentation photo 6" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-7.jpg" alt="Conference presentation photo 7" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-8.jpg" alt="Conference presentation photo 8" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-9.jpg" alt="Conference presentation photo 9" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-10.jpg" alt="Conference presentation photo 10" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-11.jpg" alt="Conference presentation photo 11" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-12.jpg" alt="Conference presentation photo 12" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-13.jpg" alt="Conference presentation photo 13" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-14.jpg" alt="Conference presentation photo 14" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-15.jpg" alt="Conference presentation photo 15" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-16.jpg" alt="Conference presentation photo 16" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-17.jpg" alt="Conference presentation photo 17" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-18.jpg" alt="Conference presentation photo 18" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-19.jpg" alt="Conference presentation photo 19" onerror="this.closest('figure').style.display='none'"></figure>
+          <figure><img src="presentation-20.jpg" alt="Conference presentation photo 20" onerror="this.closest('figure').style.display='none'"></figure>
         </div>
         <p class="gallery-empty-note reveal" id="galleryEmptyNote" style="display:none;">No photos uploaded yet — see the instructions in the file's HTML comments for how to add some.</p>
       </div>
